@@ -1,22 +1,33 @@
 from google.adk.agents import Agent
 
+from agents.skill_agent import skill_agent
+from agents.roadmap_agent import roadmap_agent
+
 
 career_agent = Agent(
     name="CareerPilot",
+
     model="gemini-2.5-flash",
-    description="AI career assistant",
+
+    description="Main AI career assistant",
+
     instruction="""
 
 You are CareerPilot AI.
 
-Your job is to help students with:
+You help students with:
 
 1. Career guidance
 2. Skill gap analysis
-3. Learning roadmap
+3. Learning roadmaps
 4. Interview preparation
 
-Give clear and practical answers.
+Use your specialist agents when needed.
 
-"""
+""",
+
+    sub_agents=[
+        skill_agent,
+        roadmap_agent
+    ]
 )
