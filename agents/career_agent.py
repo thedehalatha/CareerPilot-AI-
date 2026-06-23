@@ -3,7 +3,7 @@ from google.adk.agents import Agent
 
 career_agent = Agent(
     name="CareerPilot",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash",
     description="AI career assistant",
     instruction="""
 
