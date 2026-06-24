@@ -2,6 +2,7 @@ from google.adk.agents import Agent
 
 from agents.career_agent import career_agent
 from agents.roadmap_agent import roadmap_agent
+from agents.interview_agent import interview_agent
 
 
 root_agent = Agent(
@@ -31,7 +32,8 @@ Roadmap agent:
 """,
 
     sub_agents=[
-        career_agent,
-        roadmap_agent
-    ]
+    career_agent,
+    roadmap_agent,
+    interview_agent
+]
 )
