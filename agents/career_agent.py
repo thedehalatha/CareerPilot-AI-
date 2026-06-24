@@ -26,8 +26,5 @@ Use your specialist agents when needed.
 
 """,
 
-    sub_agents=[
-        skill_agent,
-        roadmap_agent
-    ]
+    
 )
