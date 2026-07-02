@@ -11,15 +11,39 @@ load_dotenv()
 
 from agents.root_agent import root_agent
 
-# Debug (remove later)
+# Debug (Remove later)
 print("API KEY:", os.getenv("GOOGLE_API_KEY"))
 
+
+st.set_page_config(
+    page_title="CareerPilot AI",
+    page_icon="🚀",
+    layout="wide"
+)
+
 st.title("🚀 CareerPilot AI")
+st.markdown("### Your AI-powered Career Guidance Assistant")
 
 
-# -------------------------------
-# Chat History
-# -------------------------------
+st.sidebar.title("🚀 CareerPilot AI")
+
+st.sidebar.markdown("### Features")
+
+st.sidebar.markdown("""
+- 🎯 Career Guidance
+- 🛣️ Learning Roadmap
+- 💬 Interview Preparation
+- 📄 Resume Analysis
+- 📊 Skill Gap Analysis
+""")
+
+st.sidebar.markdown("---")
+
+st.sidebar.info(
+    "Upload your resume or ask career-related questions."
+)
+
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -28,9 +52,7 @@ for msg in st.session_state.messages:
         st.write(msg["content"])
 
 
-# -------------------------------
-# Ask Agent Function
-# -------------------------------
+
 async def ask_agent(question):
 
     session_service = InMemorySessionService()
@@ -70,17 +92,17 @@ async def ask_agent(question):
     return answer
 
 
-# -------------------------------
-# Resume Upload
-# -------------------------------
+
+st.subheader("📄 Upload Resume")
+
 uploaded_file = st.file_uploader(
-    "Upload your Resume",
+    "Choose a PDF or TXT resume",
     type=["pdf", "txt"]
 )
 
 if uploaded_file:
 
-    st.success("Resume uploaded successfully!")
+    st.success("✅ Resume uploaded successfully!")
 
     if uploaded_file.type == "text/plain":
         resume_text = uploaded_file.read().decode("utf-8")
@@ -97,25 +119,26 @@ if uploaded_file:
             if text:
                 resume_text += text
 
-    st.subheader("Resume Preview")
+    st.subheader("📄 Resume Preview")
     st.write(resume_text[:500])
 
     if resume_text:
 
-        result = asyncio.run(
-            ask_agent(
-                f"Analyze this resume and give feedback:\n\n{resume_text}"
-            )
-        )
+        with st.spinner("Analyzing your resume..."):
 
-        st.subheader("Resume Analysis")
+            result = asyncio.run(
+                ask_agent(
+                    f"Analyze this resume and give feedback:\n\n{resume_text}"
+                )
+            )
+
+        st.subheader("🤖 Resume Analysis")
         st.write(result)
 
 
-# -------------------------------
-# Chat
-# -------------------------------
-user_input = st.chat_input("Ask CareerPilot...")
+user_input = st.chat_input(
+    "Ask about careers, resumes, interviews, or roadmaps..."
+)
 
 if user_input:
 
@@ -129,9 +152,11 @@ if user_input:
     with st.chat_message("user"):
         st.write(user_input)
 
-    result = asyncio.run(
-        ask_agent(user_input)
-    )
+    with st.spinner("Thinking..."):
+
+        result = asyncio.run(
+            ask_agent(user_input)
+        )
 
     st.session_state.messages.append(
         {
