@@ -4,6 +4,7 @@ from agents.career_agent import career_agent
 from agents.roadmap_agent import roadmap_agent
 from agents.interview_agent import interview_agent
 from agents.resume_agent import resume_agent
+from agents.skill_gap_agent import skill_gap_agent
 
 
 root_agent = Agent(
@@ -36,6 +37,7 @@ Roadmap agent:
     career_agent,
     roadmap_agent,
     interview_agent,
-    resume_agent
+    resume_agent,
+    skill_gap_agent
 ]
 )

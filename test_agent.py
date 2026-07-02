@@ -30,7 +30,7 @@ async def main():
         role="user",
         parts=[
             types.Part(
-                text="I want to become an AI Engineer. What should I learn?"
+                text="Analyze my skill gap. I know Python and want to become an AI Engineer"
             )
         ]
     )
