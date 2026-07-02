@@ -12,7 +12,7 @@ load_dotenv()
 from agents.root_agent import root_agent
 
 # Debug (Remove later)
-print("API KEY:", os.getenv("GOOGLE_API_KEY"))
+#print("API KEY:", os.getenv("GOOGLE_API_KEY"))
 
 
 st.set_page_config(
@@ -41,6 +41,26 @@ st.sidebar.markdown("---")
 
 st.sidebar.info(
     "Upload your resume or ask career-related questions."
+)
+st.sidebar.markdown("---")
+
+st.sidebar.markdown("### 👨‍💻 About")
+
+st.sidebar.write(
+    """
+CareerPilot AI is an AI-powered career assistant that helps students with:
+
+- 📄 Resume Analysis
+- 🎯 Career Guidance
+- 🛣️ Learning Roadmaps
+- 💬 Interview Preparation
+- 📊 Skill Gap Analysis
+
+Built using:
+- Google ADK
+- Gemini 2.5 Flash
+- Streamlit
+"""
 )
 
 
